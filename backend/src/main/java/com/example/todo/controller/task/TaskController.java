@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
@@ -45,4 +46,5 @@ public class TaskController {
     public void delete(@PathVariable long id) {
         taskService.delete(id);
     }
+
 }
