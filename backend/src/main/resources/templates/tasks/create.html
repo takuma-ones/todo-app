@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>タスク作成</title>
+</head>
+
+<div layout:fragment="content" class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">タスク作成</h2>
+            <form th:action="@{/tasks/create}" method="post" th:object="${taskForm}">
+                <div class="mb-3">
+                    <label for="summary" class="form-label">概要</label>
+                    <input type="text" class="form-control" th:field="*{summary}" th:errorclass="is-invalid"
+                           placeholder="概要名を入力">
+                    <p class="invalid-feedback" th:errors="*{summary}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">詳細</label>
+                    <textarea class="form-control" th:field="*{description}" th:errorclass="is-invalid" rows="4"
+                              placeholder="タスクの詳細を入力"></textarea>
+                    <p class="invalid-feedback" th:errors="*{description}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">ステータス</label>
+                    <select class="form-select" th:field="*{status}" th:errorclass="is-invalid">
+                        <option value="TODO">Todo</option>
+                        <option value="DOING">Doing</option>
+                        <option value="DONE">Done</option>
+                    </select>
+                    <p class="invalid-feedback" th:errors="*{status}"></p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">作成</button>
+                <a th:href="@{/tasks}" class="btn btn-secondary ms-2">戻る</a>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

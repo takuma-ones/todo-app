@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>タスク詳細</title>
+</head>
+
+<div layout:fragment="content" class="container">
+    <div th:object="${task}" class="card shadow-sm mt-4">
+        <div class="card-body">
+            <h2 class="card-title mb-4">
+                <span th:text="'#' + *{id} + ' ' + *{summary}"></span>
+            </h2>
+
+            <div class="mb-4">
+                <div class="fw-bold mb-1">ステータス</div>
+                <div>
+                    <span class="badge bg-secondary" th:text="*{status}"></span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="fw-bold mb-1">概要</div>
+                <div th:text="*{summary}"></div>
+            </div>
+
+            <a th:href="@{/tasks}" class="btn btn-outline-primary me-2">一覧に戻る</a>
+            <a th:href="@{/tasks/{id}/edit (id=*{id})}" class="btn btn-primary me-2">編集</a>
+
+            <!-- 削除ボタン -->
+            <form th:action="@{/tasks/{id}/delete(id=*{id})}" th:method="delete" class="d-inline"
+                  onsubmit="return confirm('本当に削除しますか？');">
+            <button type="submit" class="btn btn-danger">削除</button>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
