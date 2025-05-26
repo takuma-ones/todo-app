@@ -44,6 +44,9 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
+        if (!taskService.existsById(id)) {
+            throw new TaskNotFoundException();
+        }
         taskService.delete(id);
     }
 
